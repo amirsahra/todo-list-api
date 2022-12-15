@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class LoginRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,13 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', Rule::exists('users')],
-            'password' => ['required'],
+            'first_name' => ['required', 'min:3', 'max:225'],
+            'last_name' => ['required', 'min:3', 'max:225'],
+            'gender' => ['required', Rule::in(['female', 'male'])],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'email' => ['required', 'email', Rule::unique('users')],
+            'avatar' => [Rule::imageFile()], //'mimes:jpeg,jpg,png,gif|max:20000'
+            'password' => ['required', 'min:6']
         ];
     }
 
