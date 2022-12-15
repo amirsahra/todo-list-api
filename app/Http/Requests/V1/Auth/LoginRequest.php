@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\V1\Auth;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class LoginRequest extends FormRequest
@@ -28,5 +30,14 @@ class LoginRequest extends FormRequest
             'email' => ['required', Rule::exists('users')],
             'password' => ['required'],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->apiResult(__('messages.login.error'),
+            ['errors' => $validator->errors()],
+            false,
+            403
+        ));
     }
 }

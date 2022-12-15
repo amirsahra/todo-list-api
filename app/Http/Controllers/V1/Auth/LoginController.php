@@ -17,7 +17,7 @@ class LoginController extends Controller
         $token = auth()->user()->createToken('API Token')->accessToken;
 
         return response()->apiResult(__('messages.login.success'),
-            ['user' => auth()->user(), 'token' => $token]);
-
+            ['user' => auth()->user(), 'token' => $token]); //TODO return user resource
     }
+
 }
