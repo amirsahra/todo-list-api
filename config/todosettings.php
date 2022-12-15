@@ -34,6 +34,7 @@ return [
     'create_default_admin' => true,
     'create_fake_member' => true,
     'create_fake_category' => true,
+    'create_fake_task' => true,
 
     /*
     |--------------------------------------------------------------------------

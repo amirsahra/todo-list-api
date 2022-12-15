@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Task;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,9 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       $this->call([
-           UsersTableSeeder::class,
-           CategorySeeder::class
-       ]);
+        $this->call([
+            UsersTableSeeder::class,
+            CategorySeeder::class,
+            TaskSeeder::class
+        ]);
     }
 }

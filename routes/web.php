@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    dd(\App\Models\Category::select('id')->where('user_id',5)->inRandomOrder()->first());
 });
