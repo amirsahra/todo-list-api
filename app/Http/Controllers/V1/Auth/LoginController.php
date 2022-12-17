@@ -13,7 +13,7 @@ class LoginController extends Controller
         $this->middleware(['guest']);
     }
 
-    public function __invoke(LoginRequest $loginRequest)
+    public function login(LoginRequest $loginRequest)
     {
         if (!auth()->attempt($loginRequest->only('email', 'password'))) {
             return response()->apiResult(__('messages.login.error'), null, false, 401);

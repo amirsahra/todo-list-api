@@ -50,4 +50,16 @@ return [
         'category' => 10,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Image path
+    |--------------------------------------------------------------------------
+    |
+    | If you want to use images, you can specify its public address.
+    |
+    */
+    'path' => [
+        'avatar' => 'images/avatars/',
+    ],
+
 ];
