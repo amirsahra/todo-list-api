@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\ActionClasses\CreateUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,5 +45,11 @@ class User extends Authenticatable
     public function getFulNameAttribute()
     {
         return $this->first_name . $this->last_name;
+    }
+
+    public function createUser(array $data)
+    {
+        $createUserAction = new CreateUser();
+        return $createUserAction($data);
     }
 }

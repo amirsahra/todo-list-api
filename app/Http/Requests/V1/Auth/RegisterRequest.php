@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'min:3', 'max:225'],
             'last_name' => ['required', 'min:3', 'max:225'],
             'gender' => ['required', Rule::in(['female', 'male'])],
-            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10',Rule::unique('users')],
             'email' => ['required', 'email', Rule::unique('users')],
             'avatar' => [Rule::imageFile()], //'mimes:jpeg,jpg,png,gif|max:20000'
             'password' => ['required', 'min:6']
