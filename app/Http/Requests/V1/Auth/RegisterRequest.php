@@ -42,7 +42,7 @@ class RegisterRequest extends FormRequest
         throw new HttpResponseException(response()->apiResult(__('messages.validate_error'),
             ['errors' => $validator->errors()],
             false,
-            403
+            422
         ));
     }
 }

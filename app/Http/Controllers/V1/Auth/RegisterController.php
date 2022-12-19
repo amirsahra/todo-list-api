@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 
 class RegisterController extends Controller
@@ -22,6 +23,8 @@ class RegisterController extends Controller
         $newUser = $userModel->createUser($userData);
 
         $token = $newUser->createToken('API Token')->accessToken;
+
+        event(new Registered($newUser));
 
         return response()->apiResult(
             __('messages.register.success'),

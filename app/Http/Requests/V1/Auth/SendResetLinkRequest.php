@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\V1\Auth;
 
+use App\Rules\ForLoggedInUser;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Validator as Validate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class LoginRequest extends FormRequest
+class SendResetLinkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +29,20 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', Rule::exists('users')],
-            'password' => ['required'],
+            'email' => ['required', 'email', Rule::exists('users')]
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->failed()) return;
+
+            if (auth('api')->user()->email != $this->input('email')) {
+                $validator->errors()
+                    ->add('email', 'The email sent is for another user and you cannot have this request.');
+            }
+        });
     }
 
     protected function failedValidation(Validator $validator)

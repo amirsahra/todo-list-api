@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dd(\App\Models\Category::select('id')->where('user_id',5)->inRandomOrder()->first());
+    $info = array(
+        'name' => "Alex"
+    );
+    Mail::send(['html' => 'emails.verify-email'], $info, function ($message)
+    {
+        $message->to('alex@example.com', 'W3SCHOOLS')
+            ->subject('Basic test eMail from W3schools.');
+        $message->from('sender@example.com', 'Alex');
+    });
+    echo "Successfully sent the email";
 });
