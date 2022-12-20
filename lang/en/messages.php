@@ -17,6 +17,7 @@ return [
     ],
     'logout' => 'You have been successfully logged out!',
     'reset_link' => 'Reset password link sent on your email',
+    'reset_success' => 'Reset password successfully,',
     'register' => [
         'success' => 'You have successfully registered.',
     ],
@@ -24,14 +25,14 @@ return [
     'email' => [
         'verify_email' => [
             'title' => 'Welcome to Todo list',
-            'content' => "Hello :name <br> You must confirm your email to complete the registration process.".
-                         "<br>So click on the button below to confirm your email",
+            'content' => "Hello :name <br> You must confirm your email to complete the registration process." .
+                "<br>So click on the button below to confirm your email",
         ],
         'rest_password' => [
             'subject' => 'Password reset',
             'title' => 'Hello my friend',
-            'content' => "You are receiving this email because we received a password reset request for your account.".
-                "\nThis password reset link will expire in 60 minutes.".
+            'content' => "You are receiving this email because we received a password reset request for your account." .
+                "\nThis password reset link will expire in 60 minutes." .
                 "\nIf you did not request a password reset, no further action is required",
         ],
     ],
