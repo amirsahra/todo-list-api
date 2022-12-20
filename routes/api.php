@@ -25,11 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'v1/'],function (){
     Route::post('login',[LoginController::class,'login']);
     Route::post('register',[RegisterController::class,'register']);
+    Route::post('password/send-link',[ForgotPasswordController::class,'sendResetLink']);
+    Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])
+        ->name('password.reset');
+
 
     Route::middleware('auth:api')->group(function () {
         Route::get('logout',[LoginController::class,'logout']);
-        Route::post('password/send-link',[ForgotPasswordController::class,'sendResetLink']);
-        Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])->name('password.reset');
 
     });
 

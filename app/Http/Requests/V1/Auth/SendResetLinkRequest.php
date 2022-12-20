@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\V1\Auth;
 
-use App\Rules\ForLoggedInUser;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\Facades\Validator as Validate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
@@ -33,7 +31,7 @@ class SendResetLinkRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator)
+    /*public function withValidator($validator)
     {
         $validator->after(function ($validator) {
             if ($validator->failed()) return;
@@ -43,7 +41,7 @@ class SendResetLinkRequest extends FormRequest
                     ->add('email', 'The email sent is for another user and you cannot have this request.');
             }
         });
-    }
+    }*/
 
     protected function failedValidation(Validator $validator)
     {
