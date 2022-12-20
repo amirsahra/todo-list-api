@@ -32,6 +32,20 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->failed()) return;
+
+            $attemptResult = $this->checkEmailAndPasswordMatch();
+
+            if (!$attemptResult) {
+                $validator->errors()
+                    ->add('email', 'Email does not match password.');
+            }
+        });
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->apiResult(__('messages.validate_error'),
@@ -39,5 +53,13 @@ class LoginRequest extends FormRequest
             false,
             422
         ));
+    }
+
+    private function checkEmailAndPasswordMatch(): bool
+    {
+        return auth()->attempt([
+            'email' => $this->input('email'),
+            'password' => $this->input('password')
+        ]);
     }
 }

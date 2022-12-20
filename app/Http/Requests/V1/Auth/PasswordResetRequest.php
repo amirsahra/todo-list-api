@@ -39,12 +39,7 @@ class PasswordResetRequest extends FormRequest
         $validator->after(function ($validator) {
             if ($validator->failed()) return;
 
-            $result = DB::table('password_resets')
-                ->where('email', '=', $this->input('email'))
-                ->where('token', '=', $this->input('token'))
-                ->exists();
-
-            if (!$result) {
+            if (!$this->checkEmailAndTokenMatch()) {
                 $validator->errors()
                     ->add('email', 'Email does not match token.');
             }
@@ -58,6 +53,14 @@ class PasswordResetRequest extends FormRequest
             false,
             422
         ));
+    }
+
+    private function checkEmailAndTokenMatch(): bool
+    {
+         return DB::table('password_resets')
+            ->where('email', '=', $this->input('email'))
+            ->where('token', '=', $this->input('token'))
+            ->exists();
     }
 
 }

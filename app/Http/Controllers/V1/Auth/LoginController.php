@@ -16,9 +16,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $loginRequest)
     {
-        if (!auth()->attempt($loginRequest->only('email', 'password'))) {
-            return response()->apiResult(__('messages.login.error'), null, false, 401);
-        }
+        auth()->attempt($loginRequest->only('email', 'password'));
 
         $token = auth()->user()->createToken('API Token')->accessToken;
 
