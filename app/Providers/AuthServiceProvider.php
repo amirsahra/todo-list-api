@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Http\Services\BootServices\EmailResetPassword;
+use App\Http\Services\BootServices\VerifyEmail;
 use App\Http\Traits\EmailSender;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -35,7 +36,8 @@ class AuthServiceProvider extends ServiceProvider
 
         // custom reset password email
         $this->sendMailWithServiceName(EmailResetPassword::class);
-
+        // custom verify email
+        $this->sendMailWithServiceName(VerifyEmail::class);
 
     }
 }

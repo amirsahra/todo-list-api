@@ -26,8 +26,8 @@ return [
         'verify_email' => [
             'success' => 'Your email has been successfully verified.',
             'title' => 'Welcome to Todo list',
-            'content' => "Hello :name <br> You must confirm your email to complete the registration process." .
-                "<br>So click on the button below to confirm your email",
+            'content' => "Hello \n You must confirm your email to complete the registration process." .
+                "\nSo click on the button below to confirm your email",
         ],
         'rest_password' => [
             'subject' => 'Password reset',
