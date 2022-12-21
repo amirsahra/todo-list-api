@@ -12,9 +12,9 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks =Task::paginate(config('todosettings.paginate.task'));
+        $tasks = Task::paginate(config('todosettings.paginate.task'));
         return response()->apiResult(
-            __('messages.method.index',['name'=>__('values.tasks')]),[
+            __('messages.method.index', ['name' => __('values.tasks')]), [
             'tasks' => TaskResource::collection($tasks),
             'links' => TaskResource::collection($tasks)->response()->getData()->links,
             'meta' => TaskResource::collection($tasks)->response()->getData()->meta,
@@ -32,15 +32,13 @@ class TaskController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Task $task)
     {
-        //
+        return response()->apiResult(
+            __('messages.method.show', ['name' => __('values.task')]),
+            new TaskResource($task)
+        );
     }
 
     /**
@@ -55,14 +53,12 @@ class TaskController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return response()->apiResult(
+            __('messages.method.destroy', ['name' => __('values.task')]),
+        );
     }
 }

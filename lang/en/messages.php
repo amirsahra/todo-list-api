@@ -14,6 +14,8 @@ return [
 
     'method' => [
         'index' => 'Display a listing of the :name.',
+        'show' => 'Show :name.',
+        'destroy' => 'Delete :name successfully.',
     ],
 
     'login' => [
