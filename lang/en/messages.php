@@ -12,6 +12,10 @@ return [
     */
     'validate_error' => 'Incorrect Details, Please try again.',
 
+    'method' => [
+        'index' => 'Display a listing of the :name.',
+    ],
+
     'login' => [
         'success' => 'You have successfully logged in.',
     ],

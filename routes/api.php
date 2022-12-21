@@ -4,6 +4,7 @@ use App\Http\Controllers\V1\Auth\EmailVerifyController;
 use App\Http\Controllers\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
+use App\Http\Controllers\V1\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -25,11 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('test',function (){
-    $r= DB::table('password_resets')
-        ->where('email','=', 'amirhosein.sahra@gmail.com')
-        ->where('token' ,'=','$2y$10$2KZrhdjHgiI.xeOtdw.yRO4tAGqUNraDBu2XbRKGYnl7M9g.RQ6Fm')
-        ->exists();
-    return response($r);
+    $r= \App\Models\Task::find(2);
+    return response($r->category);
 });
 
 Route::group(['prefix'=>'v1/'],function (){
@@ -44,6 +42,7 @@ Route::group(['prefix'=>'v1/'],function (){
 
     Route::middleware(['auth:api','verified'])->group(function () {
         Route::get('logout',[LoginController::class,'logout']);
+        Route::apiResource('task', TaskController::class);
 
     });
 
