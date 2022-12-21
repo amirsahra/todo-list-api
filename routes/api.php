@@ -38,10 +38,11 @@ Route::group(['prefix'=>'v1/'],function (){
     Route::get('/email/verify/{id}/{hash}', [EmailVerifyController::class,'VerifyEmail'])
         ->name('verification.verify');
     Route::post('password/send-link',[ForgotPasswordController::class,'sendResetLink']);
-    Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])->name('password.reset');
+    Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])
+        ->name('password.reset');
 
 
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware(['auth:api','verified'])->group(function () {
         Route::get('logout',[LoginController::class,'logout']);
 
     });
