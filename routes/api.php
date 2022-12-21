@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\V1\Auth\EmailVerifyController;
 use App\Http\Controllers\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
@@ -34,9 +35,10 @@ Route::get('test',function (){
 Route::group(['prefix'=>'v1/'],function (){
     Route::post('login',[LoginController::class,'login']);
     Route::post('register',[RegisterController::class,'register']);
+    Route::get('/email/verify/{id}/{hash}', [EmailVerifyController::class,'VerifyEmail'])
+        ->name('verification.verify');
     Route::post('password/send-link',[ForgotPasswordController::class,'sendResetLink']);
-    Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])
-        ->name('password.reset');
+    Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])->name('password.reset');
 
 
     Route::middleware('auth:api')->group(function () {
