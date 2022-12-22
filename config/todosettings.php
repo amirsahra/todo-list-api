@@ -76,4 +76,19 @@ return [
         'avatar' => 'images/avatars/',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Min and Max time for task
+    |--------------------------------------------------------------------------
+    |
+    | You can set a value for the minimum and maximum task interval.
+    | For example, specify that there should be at least 30 minutes between
+    | now and the task execution time.
+    |
+    */
+    'time_permit' => [
+        'min' => '10 minutes',
+        'max' => '1 years',
+    ],
+
 ];

@@ -15,6 +15,8 @@ return [
     'method' => [
         'index' => 'Display a listing of the :name.',
         'show' => 'Show :name.',
+        'store' => 'Create :name successfully.',
+        'update' => 'Edit :name successfully.',
         'destroy' => 'Delete :name successfully.',
     ],
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
 use App\Http\Controllers\V1\TaskController;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('test',function (){
-    $r= \App\Models\Task::find(2);
-    return response($r->category);
+    $isExistsCategory = Category::where('id','=',10)
+       ->where('user_id','=',1)
+        ->exists();
+    return response($isExistsCategory);
 });
 
 Route::group(['prefix'=>'v1/'],function (){
