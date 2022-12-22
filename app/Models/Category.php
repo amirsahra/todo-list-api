@@ -22,4 +22,15 @@ class Category extends Model
     {
         return $this->hasOne(Task::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class,'parent_id','id')
+            ->with('children');
+    }
 }

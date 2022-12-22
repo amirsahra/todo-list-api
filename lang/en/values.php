@@ -11,6 +11,7 @@ return [
     */
     'tasks' => 'Tasks',
     'task' => 'Task',
-
+    'category' => 'Category',
+    'categories' => 'Categories',
 
 ];

@@ -4,8 +4,10 @@ use App\Http\Controllers\V1\Auth\EmailVerifyController;
 use App\Http\Controllers\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
+use App\Http\Controllers\V1\CategoryController;
 use App\Http\Controllers\V1\TaskController;
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +32,7 @@ Route::get('test',function (){
     $isExistsCategory = Category::where('id','=',10)
        ->where('user_id','=',1)
         ->exists();
-    return response(\Carbon\Carbon::now());
+    return response(Carbon::now());
 });
 
 Route::group(['prefix'=>'v1/'],function (){
@@ -46,6 +48,7 @@ Route::group(['prefix'=>'v1/'],function (){
     Route::middleware(['auth:api','verified'])->group(function () {
         Route::get('logout',[LoginController::class,'logout']);
         Route::apiResource('task', TaskController::class);
+        Route::apiResource('category', CategoryController::class);
 
     });
 
