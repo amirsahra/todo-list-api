@@ -3,12 +3,8 @@
 namespace App\Http\Requests\V1;
 
 use App\Rules\ExistsCategoryForUser;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class TaskRequest extends FormRequest
+class TaskRequest extends CustomFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,12 +30,4 @@ class TaskRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->apiResult(__('messages.validate_error'),
-            ['errors' => $validator->errors()],
-            false,
-            422
-        ));
-    }
 }

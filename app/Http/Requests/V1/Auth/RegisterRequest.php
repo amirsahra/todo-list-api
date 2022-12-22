@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests\V1\Auth;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Requests\V1\CustomFormRequest;
 use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class RegisterRequest extends CustomFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,12 +35,4 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->apiResult(__('messages.validate_error'),
-            ['errors' => $validator->errors()],
-            false,
-            422
-        ));
-    }
 }
