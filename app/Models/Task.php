@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ActionClasses\CreateTask;
+use App\Models\ActionClasses\UpdateTask;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,5 +34,11 @@ class Task extends Model
     {
         $createTaskAction = new CreateTask();
         return $createTaskAction($data);
+    }
+
+    public function updateTask(array $data): bool
+    {
+        $updateTaskAction = new UpdateTask();
+        return $updateTaskAction($data,$this);
     }
 }

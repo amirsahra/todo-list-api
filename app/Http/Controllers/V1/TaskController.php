@@ -23,13 +23,13 @@ class TaskController extends Controller
         ]);
     }
 
-    public function store(TaskRequest $request,Task $task)
+    public function store(TaskRequest $request, Task $task)
     {
         $newTask = $task->createTask($request->only('name', 'description', 'category_id', 'execution_time'));
 
         return response()->apiResult(
             __('messages.method.store', ['name' => __('values.task')]),
-            new TaskResource($newTask)
+            ['task' => new TaskResource($newTask)]
         );
     }
 
@@ -38,20 +38,17 @@ class TaskController extends Controller
     {
         return response()->apiResult(
             __('messages.method.show', ['name' => __('values.task')]),
-            new TaskResource($task)
+            ['task' => new TaskResource($task)]
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, Task $task)
     {
-        //
+        $task->updateTask($request->only('name', 'description', 'category_id', 'execution_time'));
+        return response()->apiResult(
+            __('messages.method.update', ['name' => __('values.task')]),
+            ['task' => new TaskResource($task)]
+        );
     }
 
 

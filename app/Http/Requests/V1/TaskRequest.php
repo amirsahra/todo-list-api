@@ -23,11 +23,19 @@ class TaskRequest extends CustomFormRequest
      */
     public function rules()
     {
-        return [
-            'name' => ['required', 'max:225', 'min:4'],
-            'category_id' => ['required',new ExistsCategoryForUser()],
-            'execution_time' => ['required', 'date', 'after:'. config('todosettings.time_permit.min')],
-        ];
+        if ($this->method == 'POST') {
+            return [
+                'name' => ['required', 'max:225', 'min:4'],
+                'category_id' => ['required', new ExistsCategoryForUser()],
+                'execution_time' => ['required', 'date', 'after:' . config('todosettings.time_permit.min')],
+            ];
+        } else {
+            return [
+                'name' => ['max:225', 'min:4'],
+                'category_id' => [new ExistsCategoryForUser()],
+                'execution_time' => ['date', 'after:' . config('todosettings.time_permit.min')],
+            ];
+        }
     }
 
 }

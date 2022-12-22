@@ -30,7 +30,7 @@ Route::get('test',function (){
     $isExistsCategory = Category::where('id','=',10)
        ->where('user_id','=',1)
         ->exists();
-    return response($isExistsCategory);
+    return response(\Carbon\Carbon::now());
 });
 
 Route::group(['prefix'=>'v1/'],function (){
