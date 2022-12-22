@@ -33,15 +33,12 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return response()->apiResult(
+            __('messages.method.show', ['name' => __('values.category')]),
+            ['category' => new CategoryResource($category)]
+        );
     }
 
     /**
