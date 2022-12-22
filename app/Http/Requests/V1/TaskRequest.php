@@ -13,7 +13,13 @@ class TaskRequest extends CustomFormRequest
      */
     public function authorize()
     {
-        return true;
+        if ($this->method == 'POST')
+            return true;
+
+        if (auth('api')->id() == $this->task->user_id)
+            return true;
+
+        return false;
     }
 
     /**
@@ -29,13 +35,14 @@ class TaskRequest extends CustomFormRequest
                 'category_id' => ['required', new ExistsCategoryForUser()],
                 'execution_time' => ['required', 'date', 'after:' . config('todosettings.time_permit.min')],
             ];
-        } else {
-            return [
-                'name' => ['max:225', 'min:4'],
-                'category_id' => [new ExistsCategoryForUser()],
-                'execution_time' => ['date', 'after:' . config('todosettings.time_permit.min')],
-            ];
         }
+
+        return [
+            'name' => ['max:225', 'min:4'],
+            'category_id' => [new ExistsCategoryForUser()],
+            'execution_time' => ['date', 'after:' . config('todosettings.time_permit.min')],
+        ];
+
     }
 
 }

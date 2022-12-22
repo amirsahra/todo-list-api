@@ -16,4 +16,13 @@ class CustomFormRequest extends FormRequest
             422
         ));
     }
+
+    protected function failedAuthorization()
+    {
+        throw new HttpResponseException(response()->apiResult(__('messages.validate_authorized'),
+            ['authorization' => __('messages.unauthorized')],
+            false,
+            403
+        ));
+    }
 }
