@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\CategoryRequest;
 use App\Http\Resources\V1\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -22,15 +23,14 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CategoryRequest $request,Category $category)
     {
-        //
+        $newCategory = $category->createCategory($request->only('name', 'parent_id'));
+
+        return response()->apiResult(
+            __('messages.method.store', ['name' => __('values.category')]),
+            ['task' => new CategoryResource($newCategory)]
+        );
     }
 
     public function show(Category $category)
