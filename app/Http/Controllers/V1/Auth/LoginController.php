@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\LoginRequest;
+use App\Http\Resources\V1\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,8 +23,8 @@ class LoginController extends Controller
 
         return response()->apiResult(
             __('messages.login.success'),
-            ['user' => auth()->user(), 'token' => $token]
-        ); //TODO return user resource
+            ['user' => new UserResource(auth()->user()), 'token' => $token]
+        );
     }
 
     public function logout()
