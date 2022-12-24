@@ -33,7 +33,6 @@ class TaskController extends Controller
         );
     }
 
-
     public function show(Task $task)
     {
         return response()->apiResult(
@@ -50,7 +49,6 @@ class TaskController extends Controller
             ['task' => new TaskResource($task)]
         );
     }
-
 
     public function destroy(Task $task)
     {

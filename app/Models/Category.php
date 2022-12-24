@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ActionClasses\CreateCategory;
+use App\Models\ActionClasses\UpdateCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,7 +43,7 @@ class Category extends Model
 
     public function updateCategory(array $data): bool
     {
-       // $updateTaskAction = new UpdateTask();
-      //  return $updateTaskAction($data,$this);
+        $updateCategoryAction = new UpdateCategory();
+        return $updateCategoryAction($data,$this);
     }
 }

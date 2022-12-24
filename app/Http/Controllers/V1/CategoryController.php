@@ -41,16 +41,13 @@ class CategoryController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->updateCategory($request->only('name', 'parent_id'));
+        return response()->apiResult(
+            __('messages.method.update', ['name' => __('values.category')]),
+            ['category' => new CategoryResource($category)]
+        );
     }
 
     public function destroy(Category $category)
