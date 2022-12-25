@@ -31,6 +31,7 @@ class RegisterRequest extends CustomFormRequest
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10',Rule::unique('users')],
             'email' => ['required', 'email', Rule::unique('users')],
             'avatar' => [Rule::imageFile()], //'mimes:jpeg,jpg,png,gif|max:20000'
+            'birthday' => ['date'],
             'password' => ['required', 'min:6']
         ];
     }
