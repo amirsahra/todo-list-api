@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only('index');
+        $this->middleware('admin')->only(['index','show']);
     }
 
     public function index()
@@ -36,15 +36,12 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return response()->apiResult(
+            __('messages.method.show', ['name' => __('values.user')]),
+            ['user' => new UserResource($user)]
+        );
     }
 
     /**
