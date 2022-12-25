@@ -50,7 +50,7 @@ Route::group(['prefix'=>'v1/'],function (){
         Route::get('logout',[LoginController::class,'logout']);
         Route::apiResource('task', TaskController::class);
         Route::apiResource('category', CategoryController::class);
-        Route::apiResource('user', UserController::class);
+        Route::apiResource('user', UserController::class)->except('store');
 
     });
 

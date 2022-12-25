@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\UserRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,17 +26,6 @@ class UserController extends Controller
              ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show(User $user)
     {
         return response()->apiResult(
@@ -44,16 +34,13 @@ class UserController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->updateUser($request->only('name', 'description', 'category_id', 'execution_time'));
+        return response()->apiResult(
+            __('messages.method.update', ['name' => __('values.user')]),
+            ['task' => new UserResource($user)]
+        );
     }
 
     /**
