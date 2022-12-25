@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\V1;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class UserRequest extends CustomFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +33,7 @@ class UserRequest extends FormRequest
             'gender' => [Rule::in(['female', 'male'])],
             'phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', Rule::unique('users')],
             'avatar' => [Rule::imageFile()], //'mimes:jpeg,jpg,png,gif|max:20000'
-            'password' => ['required', 'min:6']
+            'password' => ['min:6']
         ];
     }
 }
