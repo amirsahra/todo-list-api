@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only(['index', 'show']);
+        $this->middleware('admin')->only(['index', 'show','destroy']);
     }
 
     public function index()
@@ -46,14 +46,11 @@ class UserController extends Controller
         );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
-    }
+        $user->delete();
+
+        return response()->apiResult(
+            __('messages.method.destroy', ['name' => __('values.user')]),
+        );    }
 }
