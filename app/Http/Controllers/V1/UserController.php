@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('');
+        $this->middleware('admin')->only('index');
     }
 
     public function index()
