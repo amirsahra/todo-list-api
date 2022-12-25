@@ -16,7 +16,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth('api')->type == 'admin')
+        if (auth('api')->user()->type == 'admin')
             return $next($request);
 
         return response()->apiResult(__('messages.validate_authorized'),
