@@ -11,6 +11,8 @@ return [
     */
     'tasks' => 'Tasks',
     'task' => 'Task',
+    'user' => 'User',
+    'users' => 'Users',
     'category' => 'Category',
     'categories' => 'Categories',
 
