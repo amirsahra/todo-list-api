@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 
 class TaskSeeder extends FakerSeeder
@@ -35,14 +36,17 @@ class TaskSeeder extends FakerSeeder
     {
         $userId = $this->faker->numberBetween(1, $numberOfFAkeUsers);
         $categoryId = Category::select('id')->where('user_id', $userId)->inRandomOrder()->first();
+        $minTime = config('todosettings.time_permit.min');
 
         Task::create([
             'name' => $this->faker->safeColorName(),
             'description' => $this->faker->realTextBetween(10, 80),
             'user_id' => $userId,
             'category_id' => $categoryId->id,
-            'status' => 'old',
-            'execution_time' => $this->faker->dateTimeBetween('-5 years'),
+            'status' => 'new',
+            'execution_time' => Carbon::now()->addMinutes(
+                $this->faker->numberBetween($minTime, $minTime + 3)
+            ),
         ]);
     }
 }
