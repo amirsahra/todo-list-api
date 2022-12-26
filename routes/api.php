@@ -31,13 +31,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('test',function (){
-    $isExistsCategory = Category::where('id','=',10)
-       ->where('user_id','=',1)
-        ->exists();
-    return response( Task::whereDate('execution_time','=',Carbon::now())->get()
-        //config('todosettings.time_permit.min')
-        //Carbon::now()
-     //->addMinutes(config('todosettings.time_permit.min'))
+    $executionTime = Carbon::now()
+        ->addMinutes(config('todosettings.time_permit.min'));
+    $format = $executionTime->format('Y-m-d h:i:s');
+    $usersTaskExecutionTime = Task::whereDate('execution_time', '=', $format)
+        //->where('execution_time','=',$format)
+        ->count();
+
+    return response(
+        $usersTaskExecutionTime
     );
 });
 

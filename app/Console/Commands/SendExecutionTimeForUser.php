@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SendMailJob;
+use App\Mail\ExecutionTime;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -31,7 +33,12 @@ class SendExecutionTimeForUser extends Command
     public function handle()
     {
         $executionTime = Carbon::now()->addMinutes(config('todosettings.time_permit.min'));
-        $usersTaskExecutionTime = Task::whereDate('execution_time','=',$executionTime)->get();
+        $usersTaskExecutionTime = Task::whereDate('execution_time', '=', $executionTime)->get();
 
+        foreach ($usersTaskExecutionTime as $task) {
+            new SendMailJob($task->user()->email, new ExecutionTime($task));
+        }
+
+        $this->info('Successfully sent.');
     }
 }

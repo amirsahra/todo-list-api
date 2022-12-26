@@ -15,6 +15,7 @@ class SendMailJob implements ShouldQueue
 
     protected $email;
     protected $emailClass;
+    protected $model;
 
     /**
      * Create a new job instance.
@@ -24,8 +25,10 @@ class SendMailJob implements ShouldQueue
     public function __construct($email, $emailClass)
     {
         $this->email = $email;
-        $this->emailClass= $emailClass;
+        $this->emailClass = $emailClass;
+        //$this->model = $model;
     }
+
     /**
      * Execute the job.
      *
