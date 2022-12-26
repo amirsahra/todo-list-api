@@ -8,6 +8,7 @@ use App\Http\Controllers\V1\CategoryController;
 use App\Http\Controllers\V1\TaskController;
 use App\Http\Controllers\V1\UserController;
 use App\Models\Category;
+use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,11 @@ Route::get('test',function (){
     $isExistsCategory = Category::where('id','=',10)
        ->where('user_id','=',1)
         ->exists();
-    return response(Carbon::now());
+    return response( Task::whereDate('execution_time','=',Carbon::now())->get()
+        //config('todosettings.time_permit.min')
+        //Carbon::now()
+     //->addMinutes(config('todosettings.time_permit.min'))
+    );
 });
 
 Route::group(['prefix'=>'v1/'],function (){

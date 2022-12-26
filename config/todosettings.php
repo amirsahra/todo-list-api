@@ -87,8 +87,9 @@ return [
     |
     */
     'time_permit' => [
-        'min' => '10 minutes',
+        'min' => 30, // minutes
         'max' => '1 years',
+
     ],
 
 ];

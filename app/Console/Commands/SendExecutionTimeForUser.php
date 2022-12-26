@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use League\Flysystem\Config;
 
 class SendExecutionTimeForUser extends Command
 {
@@ -28,6 +30,8 @@ class SendExecutionTimeForUser extends Command
      */
     public function handle()
     {
-        //$usersTaskExecutionTime = Task::
+        $executionTime = Carbon::now()->addMinutes(config('todosettings.time_permit.min'));
+        $usersTaskExecutionTime = Task::whereDate('execution_time','=',$executionTime)->get();
+
     }
 }

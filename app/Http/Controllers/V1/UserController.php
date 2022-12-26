@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only(['index', 'show','destroy']);
+        $this->middleware('admin')->only(['index', 'show', 'destroy']);
     }
 
     public function index()
@@ -52,5 +52,6 @@ class UserController extends Controller
 
         return response()->apiResult(
             __('messages.method.destroy', ['name' => __('values.user')]),
-        );    }
+        );
+    }
 }
