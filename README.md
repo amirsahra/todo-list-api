@@ -25,6 +25,7 @@ cd todo-list-api
 composer install
 php artisan key:generate
 ```
+
 ### Configure your .env file
 Enter the database and table information that you have already created
 
@@ -42,12 +43,41 @@ DB_PASSWORD=db_password
 php artisan migrate
 ```
 
-php artisan migrate
-```
 ### Fake data
-To use fake data, you can use the created factories.
-First, go to file `config/blogsetting.php` and change the `default_admin` with your information
-Now :
+The admin user is created by default and its information can be changed in the file todosettings and index `default_admin`. 
+To create a default admin user after entering your information, 
+you must set the `create_default_admin` value to true so that the admin user will be created with your information using the seeder command.
+
+default admin example 
+```json
+'default_admin' => [
+    'first_name'  => 'Super',
+    'last_name'   => 'Admin',
+    'gender'      => 'male',
+    'type'        => 'admin',
+    'avatar'      => 'admin.png',
+    'phone'       => '98 3030',
+    'email'       => 'amirhosein.sahra@gmail.com',
+    'password'    =>'123456789',
+]
+```
+
+Also, if you need fake data, you can set the value of each of them to true in todosettings
+```json
+'create_default_admin' => true,
+'create_fake_member' => true,
+'create_fake_category' => true,
+'create_fake_task' => true,
+```
+You can also set the amount of fake data for each one
+```json
+'number_fake_data' => [
+    'user' => 19,
+    'tasks' => 100,
+    'category' => 10,
+],
+```
+
 ```bash
 php artisan db:seed
 ```
