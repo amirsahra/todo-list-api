@@ -77,7 +77,7 @@ You can also set the amount of fake data for each one
     'category' => 10,
 ],
 ```
-
+Now for insert fake data
 ```bash
 php artisan db:seed
 ```
