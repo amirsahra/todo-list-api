@@ -29,7 +29,7 @@ php artisan key:generate
 ### Configure your .env file
 Enter the database and table information that you have already created
 
-For example :
+Database example :
 ```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -38,6 +38,16 @@ DB_DATABASE=db_name
 DB_USERNAME=db_username
 DB_PASSWORD=db_password
 ```
+
+Mail example :
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=usernam
+MAIL_PASSWORD=password
+```
+
 ### Create tables
 ```bash
 php artisan migrate
