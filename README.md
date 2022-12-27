@@ -81,12 +81,31 @@ Now for insert fake data
 ```bash
 php artisan db:seed
 ```
+### Other settings file items
+
 Determine the number of views of each model on the page
 ```json
 'paginate' => [
     'user' => 10,
     'tasks' => 10,
     'category' => 10,
+],
+```
+
+Determining the address and directory of users' avatars
+```json
+'path' => [
+    'avatar' => 'images/avatars/',
+],
+```
+Determine the maximum and minimum time for the task.
+For example, if the max value is equal to 30 minutes,
+the task created by the user cannot be less than this 
+value from now until the task is executed.
+```json
+'time_permit' => [
+    'min' => 30, // minutes
+    'max' => '1 years',
 ],
 ```
 

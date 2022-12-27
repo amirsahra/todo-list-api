@@ -89,7 +89,6 @@ return [
     'time_permit' => [
         'min' => 30, // minutes
         'max' => '1 years',
-
     ],
 
 ];
