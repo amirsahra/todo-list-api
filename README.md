@@ -81,6 +81,15 @@ Now for insert fake data
 ```bash
 php artisan db:seed
 ```
+Determine the number of views of each model on the page
+```json
+'paginate' => [
+    'user' => 10,
+    'tasks' => 10,
+    'category' => 10,
+],
+```
+
 ### Final steps
 ```bash
 php artisan serv
