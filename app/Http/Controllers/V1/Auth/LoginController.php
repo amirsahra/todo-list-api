@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     *  Determining Middleware for two methods
+     */
     public function __construct()
     {
         $this->middleware(['guest'])->only('login');
+        $this->middleware(['auth:api'])->only('logout');
     }
 
     public function login(LoginRequest $loginRequest)

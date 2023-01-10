@@ -7,13 +7,10 @@ use App\Http\Controllers\V1\Auth\RegisterController;
 use App\Http\Controllers\V1\CategoryController;
 use App\Http\Controllers\V1\TaskController;
 use App\Http\Controllers\V1\UserController;
-use App\Models\Category;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,23 +23,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('test',function (){
-    $executionTime = Carbon::now()
-        ->addMinutes(config('todosettings.time_permit.min'));
-    $format = $executionTime->format('Y-m-d h:i:s');
-    $usersTaskExecutionTime = Task::whereDate('execution_time', '=', $format)
-        //->where('execution_time','=',$format)
-        ->count();
-
-    return response(
-        $usersTaskExecutionTime
-    );
-});
-
 Route::group(['prefix'=>'v1/'],function (){
     Route::post('login',[LoginController::class,'login']);
     Route::post('register',[RegisterController::class,'register']);
@@ -52,16 +32,13 @@ Route::group(['prefix'=>'v1/'],function (){
     Route::post('password/reset', [ForgotPasswordController::class ,'passwordReset'])
         ->name('password.reset');
 
-
+    Route::get('logout',[LoginController::class,'logout'])->middleware(['auth:api']);
     Route::middleware(['auth:api','verified'])->group(function () {
-        Route::get('logout',[LoginController::class,'logout']);
         Route::apiResource('task', TaskController::class);
         Route::apiResource('category', CategoryController::class);
         Route::apiResource('user', UserController::class)->except('store');
 
     });
-
-
 
 });
 
