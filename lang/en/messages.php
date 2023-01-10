@@ -13,6 +13,7 @@ return [
     'validate_error' => 'Incorrect Details, Please try again.',
     'validate_authorized' => 'This action is unauthorized.',
     'unauthorized' => 'You do not have permission to access or perform this action.',
+    'unauthenticated' => 'You do not have permission to access. You must login first',
 
     'method' => [
         'index' => 'Display a listing of the :name.',
